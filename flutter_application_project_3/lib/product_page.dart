@@ -33,7 +33,34 @@ class _ProductsState extends State<Products> {
     '14000 EGP',
     '1200 EGP',
   ];
-  final ScrollController _scrollController = ScrollController();
+
+  final List<Map<String, String>> specialOffers = [
+    {
+      "title": "50% Off Keyboard",
+      "image": "assets/keyPic.png",
+      "desc": "Get half price on gaming keyboards!",
+    },
+    {
+      "title": "Smart TV Deal",
+      "image": "assets/a3.jpg",
+      "desc": "Save big on 55-inch Smart TVs.",
+    },
+    {
+      "title": "Wide Lens Discount",
+      "image": "assets/yyy.jpg",
+      "desc": "Photography lovers, grab 30% off!",
+    },
+    {
+      "title": "Mouse Special",
+      "image": "assets/tech.jpg",
+      "desc": "High precision mouse at a discount.",
+    },
+    {
+      "title": "Note Pad Offer",
+      "image": "assets/a1.jpg",
+      "desc": "Get 2 Note Pads for the price of 1!",
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -69,6 +96,14 @@ class _ProductsState extends State<Products> {
                 Navigator.pop(context);
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.language, color: Colors.purple),
+              title: const Text('English'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+              },
+            ),
           ],
         ),
       ),
@@ -90,7 +125,6 @@ class _ProductsState extends State<Products> {
           ),
         ],
       ),
-
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -126,6 +160,7 @@ class _ProductsState extends State<Products> {
                 ),
               ),
             ),
+
             SliverPadding(
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 12),
               sliver: SliverGrid(
@@ -141,7 +176,7 @@ class _ProductsState extends State<Products> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18),
                     ),
-                    shadowColor: Color.fromARGB(
+                    shadowColor: const Color.fromARGB(
                       255,
                       176,
                       112,
@@ -159,10 +194,10 @@ class _ProductsState extends State<Products> {
                               child: Image.asset(pic[index], fit: BoxFit.cover),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 18),
                           Text(
                             products[index],
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Color.fromARGB(255, 176, 112, 188),
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
@@ -175,8 +210,7 @@ class _ProductsState extends State<Products> {
                               color: Colors.grey[700],
                             ),
                           ),
-                          SizedBox(height: 6),
-                          Spacer(),
+                          const Spacer(),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
@@ -191,20 +225,29 @@ class _ProductsState extends State<Products> {
                                         duration: Duration(seconds: 1),
                                         width: 150,
                                         behavior: SnackBarBehavior.floating,
+                                        backgroundColor: Color.fromARGB(
+                                          255,
+                                          176,
+                                          112,
+                                          188,
+                                        ),
                                       ),
                                     );
                                   },
-                                  icon: Icon(Icons.shopping_cart, size: 18),
-                                  label: Text(''),
+                                  icon: const Icon(
+                                    Icons.add_shopping_cart,
+                                    size: 18,
+                                  ),
+                                  label: const Text(''),
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: Color.fromARGB(
+                                    foregroundColor: const Color.fromARGB(
                                       255,
                                       176,
                                       112,
                                       188,
                                     ),
                                     elevation: 2,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                       horizontal: 8,
                                       vertical: 4,
                                     ),
@@ -214,7 +257,7 @@ class _ProductsState extends State<Products> {
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 6),
+                              const SizedBox(width: 6),
                               Flexible(
                                 child: ElevatedButton.icon(
                                   onPressed: () {
@@ -224,20 +267,27 @@ class _ProductsState extends State<Products> {
                                         duration: Duration(seconds: 1),
                                         width: 80,
                                         behavior: SnackBarBehavior.floating,
+                                        backgroundColor: Color.fromARGB(
+                                          255,
+                                          176,
+                                          112,
+                                          188,
+                                        ),
                                       ),
                                     );
                                   },
-                                  icon: Icon(Icons.bookmark, size: 18),
-                                  label: Text(''),
+                                  icon: const Icon(Icons.bookmark, size: 18),
+                                  label: const Text(''),
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: Color.fromARGB(
+                                    foregroundColor: const Color.fromARGB(
                                       255,
                                       176,
                                       112,
                                       188,
                                     ),
+
                                     elevation: 2,
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                       horizontal: 8,
                                       vertical: 4,
                                     ),
@@ -247,6 +297,7 @@ class _ProductsState extends State<Products> {
                                   ),
                                 ),
                               ),
+                              const SizedBox(height: 70),
                             ],
                           ),
                         ],
@@ -254,6 +305,83 @@ class _ProductsState extends State<Products> {
                     ),
                   );
                 }, childCount: pic.length),
+              ),
+            ),
+
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Text(
+                  "🔥 Hot Offers",
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.purple.shade800,
+                  ),
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: specialOffers.length,
+                itemBuilder: (context, index) {
+                  final offer = specialOffers[index];
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 8,
+                    ),
+                    child: Card(
+                      elevation: 6,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.asset(
+                                offer["image"]!,
+                                width: 80,
+                                height: 80,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    offer["title"]!,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 176, 112, 188),
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    offer["desc"]!,
+                                    style: const TextStyle(fontSize: 14),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Icon(
+                              Icons.local_offer,
+                              color: Colors.purple.shade600,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
           ],
