@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'product_page.dart';
 
@@ -20,7 +21,7 @@ class _SignInState extends State<SignIn> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Signed In successfully'),
+        title: Text(tr("signIn massage")),
         actions: [
           TextButton(
             onPressed: () {
@@ -37,7 +38,7 @@ class _SignInState extends State<SignIn> {
                 ),
               );
             },
-            child: Text('Close'),
+            child: Text(tr("close massage")),
           ),
         ],
       ),
@@ -94,7 +95,7 @@ class _SignInState extends State<SignIn> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Welcome Back',
+                          tr("welcome back"),
                           style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
@@ -103,7 +104,7 @@ class _SignInState extends State<SignIn> {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Sign in to Shop Tech',
+                          tr("sign in call to action"),
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.grey[700],
@@ -114,17 +115,17 @@ class _SignInState extends State<SignIn> {
                           controller: emailController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email is required';
+                              return tr("email req mass");
                             } else if (!RegExp(
                               r'^[^@]+@[^@]+\.[^@]+',
                             ).hasMatch(value)) {
-                              return 'Enter a valid email';
+                              return tr("invalid email mass");
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            labelText: 'Email',
-                            hintText: 'Enter your email',
+                            labelText: tr("email"),
+                            hintText: tr("hint email"),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -135,14 +136,14 @@ class _SignInState extends State<SignIn> {
                           controller: passwordController,
                           validator: (value) {
                             if (value != null && value.length < 6) {
-                              return 'Password must be at least 6 characters';
+                              return tr("password min mass");
                             }
                             return null;
                           },
                           obscureText: hiddenPassword,
                           decoration: InputDecoration(
-                            labelText: 'Password',
-                            hintText: 'Enter your password',
+                            labelText: tr("password"),
+                            hintText: tr("hint password"),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -177,7 +178,7 @@ class _SignInState extends State<SignIn> {
                               ),
                             ),
                             child: Text(
-                              'Sign In',
+                              tr("signIn"),
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,

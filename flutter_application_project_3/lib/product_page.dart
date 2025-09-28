@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class Products extends StatefulWidget {
@@ -9,72 +10,72 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-  List pic = [
-    'assets/keyPic.png',
-    'assets/tech.jpg',
-    'assets/a1.jpg',
-    'assets/a2.jpg',
-    'assets/a3.jpg',
-    'assets/yyy.jpg',
-  ];
-  List products = [
-    'Keyboard',
-    'Mouse',
-    'Car viewcam',
-    'Note Pad',
-    'Smart TV',
-    'WideAngle Lens',
-  ];
-  List price = [
-    '1500 EGP',
-    '700 EGP',
-    '3000 EGP',
-    '300 EGP',
-    '14000 EGP',
-    '1200 EGP',
-  ];
-
-  final List<Map<String, String>> specialOffers = [
-    {
-      "title": "50% Off Keyboard",
-      "image": "assets/keyPic.png",
-      "desc": "Get half price on gaming keyboards!",
-    },
-    {
-      "title": "Smart TV Deal",
-      "image": "assets/a3.jpg",
-      "desc": "Save big on 55-inch Smart TVs.",
-    },
-    {
-      "title": "Wide Lens Discount",
-      "image": "assets/yyy.jpg",
-      "desc": "Photography lovers, grab 30% off!",
-    },
-    {
-      "title": "Mouse Special",
-      "image": "assets/tech.jpg",
-      "desc": "High precision mouse at a discount.",
-    },
-    {
-      "title": "Note Pad Offer",
-      "image": "assets/a1.jpg",
-      "desc": "Get 2 Note Pads for the price of 1!",
-    },
-  ];
+  changLang() {
+    if (context.locale == Locale('en', 'US')) {
+      context.setLocale(Locale('ar', 'EG'));
+    } else {
+      context.setLocale(Locale('en', 'US'));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    List pic = [
+      'assets/keyPic.png',
+      'assets/tech.jpg',
+      'assets/a1.jpg',
+      'assets/a2.jpg',
+      'assets/a3.jpg',
+      'assets/yyy.jpg',
+    ];
+    List products = [
+      tr("Keyboard"),
+      tr("Mouse"),
+      tr("Car viewcam"),
+      tr("Note Pad"),
+      tr("Smart TV"),
+      tr("WideAngle Lens"),
+    ];
+    List price = [
+      tr("price k"),
+      tr("price m"),
+      tr("price c"),
+      tr("price n"),
+      tr("price tv"),
+      tr("price w"),
+    ];
+
+    final List<Map<String, String>> specialOffers = [
+      {
+        "title": tr("offer k"),
+        "image": "assets/keyPic.png",
+        "disc": tr("disc k"),
+      },
+      {
+        "title": tr("offer tv"),
+        "image": "assets/a3.jpg",
+        "disc": tr("disc tv"),
+      },
+      {"title": tr("offer w"), "image": "assets/yyy.jpg", "disc": tr("disc w")},
+      {
+        "title": tr("offer m"),
+        "image": "assets/tech.jpg",
+        "disc": tr("disc m"),
+      },
+      {"title": tr("offer n"), "image": "assets/a1.jpg", "disc": tr("disc n")},
+    ];
+
     return Scaffold(
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            const DrawerHeader(
+            DrawerHeader(
               decoration: BoxDecoration(
                 color: Color.fromARGB(255, 228, 226, 226),
               ),
               child: Text(
-                'Shop Tech',
+                tr("appName"),
                 style: TextStyle(
                   color: Color.fromARGB(255, 176, 112, 188),
                   fontSize: 24,
@@ -83,22 +84,22 @@ class _ProductsState extends State<Products> {
             ),
             ListTile(
               leading: const Icon(Icons.shopping_bag, color: Colors.purple),
-              title: const Text('Products'),
+              title: Text(tr("pro")),
               onTap: () {
                 Navigator.pop(context);
+              },
+            ),
+
+            ListTile(
+              leading: const Icon(Icons.language, color: Colors.purple),
+              title: Text(tr("lang")),
+              onTap: () {
+                changLang();
               },
             ),
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.purple),
-              title: const Text('Logout'),
-              onTap: () {
-                Navigator.pop(context);
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.language, color: Colors.purple),
-              title: const Text('English'),
+              title: Text(tr("logout")),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.pop(context);
@@ -110,8 +111,8 @@ class _ProductsState extends State<Products> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
-        title: const Text(
-          'Our Products',
+        title: Text(
+          tr("our pro"),
           style: TextStyle(color: Color.fromARGB(255, 176, 112, 188)),
         ),
         elevation: 2,
@@ -218,9 +219,9 @@ class _ProductsState extends State<Products> {
                                 child: ElevatedButton.icon(
                                   onPressed: () {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
+                                      SnackBar(
                                         content: Center(
-                                          child: Text('Added to cart!'),
+                                          child: Text(tr("added to cart mass")),
                                         ),
                                         duration: Duration(seconds: 1),
                                         width: 150,
@@ -262,8 +263,10 @@ class _ProductsState extends State<Products> {
                                 child: ElevatedButton.icon(
                                   onPressed: () {
                                     ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Center(child: Text('Saved')),
+                                      SnackBar(
+                                        content: Center(
+                                          child: Text(tr("saved mass")),
+                                        ),
                                         duration: Duration(seconds: 1),
                                         width: 80,
                                         behavior: SnackBarBehavior.floating,
@@ -297,7 +300,7 @@ class _ProductsState extends State<Products> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 70),
+                              const SizedBox(height: 60),
                             ],
                           ),
                         ],
@@ -312,7 +315,7 @@ class _ProductsState extends State<Products> {
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: Text(
-                  "🔥 Hot Offers",
+                  tr("hot offers"),
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -366,7 +369,7 @@ class _ProductsState extends State<Products> {
                                   ),
                                   const SizedBox(height: 4),
                                   Text(
-                                    offer["desc"]!,
+                                    offer["disc"]!,
                                     style: const TextStyle(fontSize: 14),
                                   ),
                                 ],

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'product_page.dart';
 
@@ -23,11 +24,11 @@ class _SignUpState extends State<SignUp> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Account created successfully'),
+        title: Text(tr("signUp massage")),
         actions: [
           TextButton(
             onPressed: () {
-              Navigator.pop(context); 
+              Navigator.pop(context);
               Navigator.of(context).pushReplacement(
                 PageRouteBuilder(
                   transitionDuration: Duration(milliseconds: 700),
@@ -40,7 +41,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               );
             },
-            child: Text('Close'),
+            child: Text(tr("close massage")),
           ),
         ],
       ),
@@ -75,11 +76,8 @@ class _SignUpState extends State<SignUp> {
             Center(
               child: SingleChildScrollView(
                 child: Container(
-                  width:
-                      MediaQuery.of(context).size.width * 0.9,
-                  constraints: BoxConstraints(
-                    maxWidth: 450,
-                  ), 
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  constraints: BoxConstraints(maxWidth: 450),
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -98,7 +96,7 @@ class _SignUpState extends State<SignUp> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Create Account',
+                          tr("Create Account"),
                           style: TextStyle(
                             fontSize: 36,
                             fontWeight: FontWeight.bold,
@@ -107,7 +105,7 @@ class _SignUpState extends State<SignUp> {
                         ),
                         SizedBox(height: 8),
                         Text(
-                          'Sign up to Shop Me',
+                          tr("Sign up call to action"),
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.grey[700],
@@ -118,16 +116,16 @@ class _SignUpState extends State<SignUp> {
                           controller: nameController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Full Name is required';
+                              return tr("full name req mass");
                             }
                             if (!RegExp(r'^[A-Z]').hasMatch(value.trim())) {
-                              return 'First letter must be uppercase';
+                              return tr("first letter mass");
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            labelText: 'Full Name',
-                            hintText: 'Enter your full name',
+                            labelText: tr("name"),
+                            hintText: tr("hint name"),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -138,18 +136,18 @@ class _SignUpState extends State<SignUp> {
                           controller: emailController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Email is required';
+                              return tr("email req mass");
                             }
                             if (!RegExp(
                               r'^[^@]+@[^@]+\.[^@]+',
                             ).hasMatch(value)) {
-                              return 'Enter a valid email';
+                              return tr("invalid email mass");
                             }
                             return null;
                           },
                           decoration: InputDecoration(
-                            labelText: 'Email',
-                            hintText: 'Enter your email',
+                            labelText: tr("email"),
+                            hintText: tr("hint email"),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -160,17 +158,17 @@ class _SignUpState extends State<SignUp> {
                           controller: passwordController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Password is required';
+                              return tr("password req mass");
                             }
                             if (value.length < 6) {
-                              return 'Password must be at least 6 characters';
+                              return tr("password min mass");
                             }
                             return null;
                           },
                           obscureText: hiddenPassword,
                           decoration: InputDecoration(
-                            labelText: 'Password',
-                            hintText: 'Enter your password',
+                            labelText: tr("password"),
+                            hintText: tr("hint password"),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -193,17 +191,17 @@ class _SignUpState extends State<SignUp> {
                           controller: confirmPasswordController,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
-                              return 'Confirm Password is required';
+                              return tr("password confirm mass");
                             }
                             if (value != passwordController.text) {
-                              return 'Passwords do not match';
+                              return tr("password not match");
                             }
                             return null;
                           },
                           obscureText: hiddenConfirmPassword,
                           decoration: InputDecoration(
-                            labelText: 'Confirm Password',
-                            hintText: 'Re-enter your password',
+                            labelText: tr("password confirm"),
+                            hintText: tr("re password confirm"),
                             suffixIcon: IconButton(
                               onPressed: () {
                                 setState(() {
@@ -239,7 +237,7 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             child: Text(
-                              'Sign Up',
+                              tr("signUp"),
                               style: TextStyle(
                                 fontSize: 20,
                                 color: Colors.white,

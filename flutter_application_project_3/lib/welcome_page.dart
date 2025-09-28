@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'sign_in.dart';
 import 'sign_up.dart';
@@ -20,6 +21,16 @@ class _WelcomePageState extends State<WelcomePage> {
     final subtitleFontSize = screenWidth < 400 ? 16.0 : 20.0;
 
     return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            icon: Icon(Icons.language),
+            onPressed: () {
+              changLang();
+            },
+          ),
+        ],
+      ),
       body: Container(
         width: double.infinity,
         height: double.infinity,
@@ -36,7 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  'Shop Tech',
+                  tr("appName"),
                   style: TextStyle(
                     fontSize: titleFontSize,
                     fontWeight: FontWeight.bold,
@@ -45,7 +56,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   textAlign: TextAlign.center,
                 ),
                 Text(
-                  'Your one-stop shop for everything!',
+                  tr("discribtion"),
                   style: TextStyle(
                     fontSize: subtitleFontSize,
                     color: Colors.white70,
@@ -109,7 +120,10 @@ class _WelcomePageState extends State<WelcomePage> {
                           horizontal: 16,
                           vertical: 8,
                         ),
-                        child: Text('Sign Up', style: TextStyle(fontSize: 18)),
+                        child: Text(
+                          tr("signUp"),
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ),
                     SizedBox(width: 20),
@@ -141,7 +155,10 @@ class _WelcomePageState extends State<WelcomePage> {
                           horizontal: 16,
                           vertical: 8,
                         ),
-                        child: Text('Sign In', style: TextStyle(fontSize: 18)),
+                        child: Text(
+                          tr("signIn"),
+                          style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ),
                   ],
@@ -153,5 +170,13 @@ class _WelcomePageState extends State<WelcomePage> {
         ),
       ),
     );
+  }
+
+  changLang() {
+    if (context.locale == Locale('en', 'US')) {
+      context.setLocale(Locale('ar', 'EG'));
+    } else {
+      context.setLocale(Locale('en', 'US'));
+    }
   }
 }
